@@ -1,4 +1,4 @@
-package com.example.androidbtl_db;
+package haui.android;
 
 import static java.lang.Boolean.FALSE;
 
@@ -8,46 +8,96 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
-
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String USER_TABLE = "USER_TABLE";
-    private static final String USER_ID = "USER_ID";
-    private static final String USER_NAME = "USER_NAME";
-    private static final String USER_SCORE = "USER_SCORE";
 
-    private static final String QUESTION_TABLE = "QUESTION_TABLE";
-    private static final String QUESTION_ID = "QUESTION_ID";
-    private static final String QUESTION_CONTENT = "QUESTION_CONTENT";
+        private static final String DB_NAME = "AiLaTrieuPhu.db";
+        private static final int DB_VERSION = 1;
 
-    private static final String ANSWER_TABLE = "ANSWER_TABLE";
-    private static final String ANSWER_ID = "ANSWER_ID";
-    private static final String ANSWER_CONTENT = "ANSWER_CONTENT";
-    private static final String IS_TRUE = "IS_TRUE";
+        private static final String USER_TABLE = "USER";
+        private static final String USER_ID = "id";
+        private static final String USER_NAME = "username";
+        private static final String USER_SCORE = "score";
 
+        private static final String QUESTION_TABLE = "QUESTION";
+        private static final String QUESTION_ID = "id";
+        private static final String QUESTION_CONTENT = "content";
 
-    public DatabaseHelper(@Nullable Context context) {
-        super(context, "game.db", null, 2);
-    }
+        private static final String ANSWER_TABLE = "ANSWER";
+        private static final String ANSWER_ID = "id";
+        private static final String ANSWER_CONTENT = "content";
+        private static final String IS_TRUE = "is_true";
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_SCORE + " INTEGER)";
-        String createQuestionTable = "CREATE TABLE " + QUESTION_TABLE + " ( " + QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION_CONTENT + " TEXT)";
-        String createAnswerTable = "CREATE TABLE " + ANSWER_TABLE + " (" + ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER_CONTENT + " TEXT, " + IS_TRUE + " BOOL)";
-
-        db.execSQL(createUserTable);
-        db.execSQL(createQuestionTable);
-        db.execSQL(createAnswerTable);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // If you need to add a column
-        if (newVersion > oldVersion) {
-            db.execSQL("ALTER TABLE ANSWER_TABLE  ADD COLUMN QUESTION_ID INTEGER Default 0");
+        public DatabaseHelper(@Nullable Context context) {
+            super(context, DB_NAME, null, DB_VERSION);
         }
-    }
 
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_SCORE + " INTEGER DEFAULT 0)";
+            String createQuestionTable = "CREATE TABLE " + QUESTION_TABLE + " ( " + QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION_CONTENT + " TEXT)";
+            String createAnswerTable = "CREATE TABLE " + ANSWER_TABLE + " (" + ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER_CONTENT + " TEXT, " + IS_TRUE + " INTEGER, "
+                    + " question_id INTEGER NOT NULL REFERENCES " + QUESTION_TABLE + "("+ QUESTION_ID + ")" + ")";
+
+            db.execSQL(createUserTable);
+            db.execSQL(createQuestionTable);
+            db.execSQL(createAnswerTable);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+        }
+//    private static final String USER_TABLE = "USER_TABLE";
+//    private static final String USER_ID = "USER_ID";
+//    private static final String USER_NAME = "USER_NAME";
+//    private static final String USER_SCORE = "USER_SCORE";
+//
+//    private static final String QUESTION_TABLE = "QUESTION_TABLE";
+//    private static final String QUESTION_ID = "QUESTION_ID";
+//    private static final String QUESTION_CONTENT = "QUESTION_CONTENT";
+//
+//    private static final String ANSWER_TABLE = "ANSWER_TABLE";
+//    private static final String ANSWER_ID = "ANSWER_ID";
+//    private static final String ANSWER_CONTENT = "ANSWER_CONTENT";
+//    private static final String IS_TRUE = "IS_TRUE";
+//
+//    private final String DropTable = "DROP TABLE IF EXISTS " + ANSWER_TABLE;
+//    private final String referTable = "ALTER TABLE ANSWER_TABLE ADD COLUMN FOREIGN KEY (QUESTION_ID) REFERENCES QUESTION_TABLE(QUESTION_ID)";
+//    private final String createAnswerTable = "CREATE TABLE " + ANSWER_TABLE + " (" + ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER_CONTENT + " TEXT, " + IS_TRUE + " BOOL, " + QUESTION_ID + " INTEGER, FOREIGN KEY (" + QUESTION_ID + ") REFERENCES  " + QUESTION_TABLE + "(" + QUESTION_ID + "))";
+    //private final String createAnswerTable = "CREATE TABLE IF NOT EXISTS ANSWER_TABLE(ANSWER_ID)";
+
+
+//    public DatabaseHelper(@Nullable Context context) {
+//        super(context, "game.db", null, 5);
+//    }
+//
+//    @Override
+//    public void onCreate(SQLiteDatabase db) {
+//        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_SCORE + " INTEGER)";
+//        String createQuestionTable = "CREATE TABLE " + QUESTION_TABLE + " ( " + QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION_CONTENT + " TEXT)";
+//
+//        db.execSQL(createUserTable);
+//        db.execSQL(createQuestionTable);
+//
+//        //db.rawQuery(MY_QUERY, new String[]{String.valueOf(propertyId)});
+//    }
+//
+//    @Override
+//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        // If you need to add a column
+//        if (newVersion > oldVersion) {
+//           db.execSQL(createAnswerTable);
+//        }
+//    }
+//
+//    @Override
+//    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        // If you need to add a column
+//        if (newVersion < oldVersion) {
+//           db.execSQL(DropTable);
+//        }
+//    }
+//
     public void insertData(){
         SQLiteDatabase db = this.getWritableDatabase();
 
