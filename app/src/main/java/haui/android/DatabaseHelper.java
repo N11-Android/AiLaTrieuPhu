@@ -8,47 +8,56 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final String DB_NAME = "AiLaTrieuPhu.db";
-        private static final int DB_VERSION = 1;
+    private static final String DATABASE_NAME = "AiLaTrieuPhu.db";
+    private static final int DATABASE_VERSION = 1;
 
-        private static final String USER_TABLE = "USER";
-        private static final String USER_ID = "id";
-        private static final String USER_NAME = "username";
-        private static final String USER_SCORE = "score";
+    private static final String USER_TABLE = "USER";
+    private static final String USER_ID = "id";
+    private static final String USER_NAME = "username";
+    private static final String USER_SCORE = "score";
 
-        private static final String QUESTION_TABLE = "QUESTION";
-        private static final String QUESTION_ID = "id";
-        private static final String QUESTION_CONTENT = "content";
+    private static final String QUESTION_TABLE = "QUESTION";
+    private static final String QUESTION_ID = "id";
+    private static final String QUESTION_CONTENT = "content";
 
-        private static final String ANSWER_TABLE = "ANSWER";
-        private static final String ANSWER_ID = "id";
-        private static final String ANSWER_CONTENT = "content";
-        private static final String IS_TRUE = "is_true";
+    private static final String ANSWER_TABLE = "ANSWER";
+    private static final String ANSWER_ID = "id";
+    private static final String ANSWER_CONTENT = "content";
+    private static final String IS_TRUE = "is_true";
 
-        public DatabaseHelper(@Nullable Context context) {
-            super(context, DB_NAME, null, DB_VERSION);
-        }
+    private final Context myContext;
 
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_SCORE + " INTEGER DEFAULT 0)";
-            String createQuestionTable = "CREATE TABLE " + QUESTION_TABLE + " ( " + QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION_CONTENT + " TEXT)";
-            String createAnswerTable = "CREATE TABLE " + ANSWER_TABLE + " (" + ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER_CONTENT + " TEXT, " + IS_TRUE + " INTEGER, "
-                    + " question_id INTEGER NOT NULL REFERENCES " + QUESTION_TABLE + "("+ QUESTION_ID + ")" + ")";
+    public DatabaseHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        myContext = context;
+    }
 
-            db.execSQL(createUserTable);
-            db.execSQL(createQuestionTable);
-            db.execSQL(createAnswerTable);
-        }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String createUserTable = "CREATE TABLE " + USER_TABLE + " (" + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " TEXT, " + USER_SCORE + " INTEGER DEFAULT 0)";
+        String createQuestionTable = "CREATE TABLE " + QUESTION_TABLE + " ( " + QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION_CONTENT + " TEXT)";
+        String createAnswerTable = "CREATE TABLE " + ANSWER_TABLE + " (" + ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER_CONTENT + " TEXT, " + IS_TRUE + " INTEGER, "
+                + " question_id INTEGER NOT NULL REFERENCES " + QUESTION_TABLE + "(" + QUESTION_ID + ")" + ")";
 
-        @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        db.execSQL(createUserTable);
+        db.execSQL(createQuestionTable);
+        db.execSQL(createAnswerTable);
+    }
 
-        }
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-    public void insertData(){
+    }
+
+    public void insertData() {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues forUser = new ContentValues();
@@ -66,5 +75,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         forAnswer.put(QUESTION_ID, 0);
         forAnswer.put(IS_TRUE, FALSE);
         db.insert(ANSWER_TABLE, null, forAnswer);
+    }
+
+    public void copyDataBase() throws IOException
+    {
+        InputStream ip = myContext.getAssets().open(DATABASE_NAME);
+        String op =  "/data/data/com.example.demo/databases/"  +  DATABASE_NAME ;
+        OutputStream output = new FileOutputStream( op);
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = ip.read(buffer))>0){
+            output.write(buffer, 0, length);
+        }
+        output.flush();
+        output.close();
+        ip.close();
     }
 }
