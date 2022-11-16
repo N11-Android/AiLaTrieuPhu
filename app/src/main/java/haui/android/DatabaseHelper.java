@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void copyDataBase() throws IOException
     {
         InputStream ip = myContext.getAssets().open(DATABASE_NAME);
-        String op =  "/data/data/com.example.demo/databases/"  +  DATABASE_NAME ;
+        String op =  "/data/data/haui.android/databases/"  +  DATABASE_NAME ;
         OutputStream output = new FileOutputStream( op);
         byte[] buffer = new byte[1024];
         int length;
