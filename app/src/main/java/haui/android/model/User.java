@@ -8,6 +8,12 @@ public class User implements Serializable {
     private String username;
     private Integer score;
 
+    public User(Integer id, String username, Integer score) {
+        this.id = id;
+        this.username = username;
+        this.score = score;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -30,5 +36,10 @@ public class User implements Serializable {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return id + "-" + username + "-" + score;
     }
 }
