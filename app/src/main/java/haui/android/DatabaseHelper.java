@@ -99,7 +99,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ip.close();
     }
 
-    /*
     public ArrayList<User> getHighscoreList(){
         SQLiteDatabase db  = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectOrderedList, null);
@@ -130,5 +129,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return user_list;
     }
-     */
 }
