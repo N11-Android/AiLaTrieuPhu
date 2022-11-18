@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final Context myContext;
 
-    private final String selectOrderedList = "SELECT * FROM " + USER_TABLE + " ORDER BY " + USER_SCORE + " DESC";
+    private final String selectOrderedList = "SELECT * FROM " + USER_TABLE + " ORDER BY " + USER_SCORE + " DESC " + " LIMIT 5 ";
 
 
     public DatabaseHelper(@Nullable Context context) {
