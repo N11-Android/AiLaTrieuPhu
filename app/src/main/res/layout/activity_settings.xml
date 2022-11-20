@@ -33,9 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/toggle_button_on"
-            android:textOff=""
-            android:textOn="" />
+            android:textOff="Bật"
+            android:textOn="Tắt" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -49,7 +48,8 @@
             android:layout_height="42dp"
             android:layout_centerVertical="true"
             android:paddingRight="16dp"
-            android:src="@drawable/icon_sound" />
+            android:src="@drawable/icon_sound"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,9 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/toggle_button_on"
-            android:textOff=""
-            android:textOn="" />
+            android:textOff="Bật"
+            android:textOn="Tắt" />
     </RelativeLayout>
 
 </LinearLayout>

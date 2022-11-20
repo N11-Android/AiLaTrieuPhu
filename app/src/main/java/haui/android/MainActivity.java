@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_layout_money);
+        setContentView(R.layout.activity_settings);
 
 //        DatabaseHelper helper = new DatabaseHelper(MainActivity.this);
 //        helper.insertData();
