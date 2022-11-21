@@ -7,11 +7,18 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
+import haui.android.manager.MusicManager;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static Context context;
+    private static MusicManager musicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
+        musicPlayer = new MusicManager(this);
         setContentView(R.layout.activity_main);
 
         DatabaseHelper helper = new DatabaseHelper(MainActivity.this);
@@ -21,5 +28,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static MusicManager getMusicPlayer(){
+        return musicPlayer;
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }
