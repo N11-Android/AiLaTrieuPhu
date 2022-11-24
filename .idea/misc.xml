@@ -3,10 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/drawable/btn_5050_bg.xml" value="0.2095" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/drawable/btn_audience_bg.xml" value="0.3875" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/drawable/btn_call_bg.xml" value="0.3875" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3875" />
         <entry key="..\:/AiLaTrieuPhu/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.206" />
         <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/about_dialog.xml" value="0.19947916666666668" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_high_score.xml" value="0.19947916666666668" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_lv_high_score.xml" value="0.2978227060653188" />
         <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
-        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_settings.xml" value="0.5" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_main2.xml" value="0.38333333333333336" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_player.xml" value="0.3875" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/audience_layout.xml" value="0.20208333333333334" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/fragment_home.xml" value="0.20208333333333334" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/high_score_view.xml" value="0.19947916666666668" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/notice_dialog.xml" value="0.3875" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/player_layout_money.xml" value="0.20208333333333334" />
+        <entry key="..\:/AiLaTrieuPhu/app/src/main/res/layout/score_dialog.xml" value="0.3875" />
         <entry key="..\:/AiLaTrieuPhu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.207" />
         <entry key="..\:/AiLaTrieuPhu/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.207" />
         <entry key="..\:/Android/AiLaTrieuPhu/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />

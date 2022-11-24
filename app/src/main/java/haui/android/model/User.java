@@ -4,31 +4,42 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private Integer id;
+    private int id;
     private String username;
-    private Integer score;
+    private int score;
 
-    public Integer getId() {
-        return id;
+    public User(Integer id, String username, Integer score) {
+        this.id = id;
+        this.username = username;
+        this.score = score;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
         return username;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public Integer getScore() {
-        return score;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
+    @Override
+    public String toString() {
+        return id + "-" + username + "-" + score;
     }
 }

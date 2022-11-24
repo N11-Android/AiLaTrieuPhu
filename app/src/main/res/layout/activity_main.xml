@@ -31,4 +31,10 @@
             android:src="@drawable/loading" />
     </TableRow>
 
+    <Button
+        android:id="@+id/button_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
 </FrameLayout>

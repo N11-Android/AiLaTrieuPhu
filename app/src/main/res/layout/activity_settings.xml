@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#424242"
+    android:background="#851379"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
             android:layout_height="42dp"
             android:layout_centerVertical="true"
             android:paddingRight="16dp"
-            android:src="@drawable/icon_music" />
+            android:src="@drawable/muzik" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,14 +27,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ToggleButton
+        <Switch
             android:id="@+id/tog_music"
             android:layout_width="102dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textOff="Bật"
-            android:textOn="Tắt" />
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -48,8 +46,7 @@
             android:layout_height="42dp"
             android:layout_centerVertical="true"
             android:paddingRight="16dp"
-            android:src="@drawable/icon_sound"
-            />
+            android:src="@drawable/speaker" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,14 +58,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ToggleButton
+        <Switch
             android:id="@+id/tog_sound"
             android:layout_width="102dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textOff="Bật"
-            android:textOn="Tắt" />
+            android:layout_marginRight="1dp" />
     </RelativeLayout>
 
 </LinearLayout>

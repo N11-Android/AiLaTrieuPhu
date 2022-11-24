@@ -6,24 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/player_money_background"
-    tools:context="com.example.laltp.activity.HighScoreActivity">
+    tools:context=".layout.HighScore">
 
     <TextView
-        android:paddingTop="72dp"
-        android:paddingBottom="16dp"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:textAllCaps="true"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#ecec09"
         android:layout_height="wrap_content"
-        android:text="High score"/>
+        android:gravity="center"
+        android:text="Điểm cao"
+        android:textAllCaps="true"
+        android:textColor="#ecec09"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:textStyle="bold" />
 
     <ListView
-        android:padding="16dp"
-        android:id="@android:id/list"
+        android:id="@+id/hs_lv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></ListView>
+        android:layout_height="match_parent" />
+
 </LinearLayout>
