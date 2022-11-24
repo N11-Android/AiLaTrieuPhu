@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private int id;
+    private Integer id;
     private String username;
-    private int score;
+    private Integer score;
 
     public User(Integer id, String username, Integer score) {
         this.id = id;
@@ -14,7 +14,7 @@ public class User implements Serializable {
         this.score = score;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -22,11 +22,11 @@ public class User implements Serializable {
         return username;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

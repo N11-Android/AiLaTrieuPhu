@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final Context myContext;
 
-    private final String selectOrderedList = "SELECT * FROM " + USER_TABLE + " ORDER BY " + USER_SCORE + " DESC ";
+    private final String selectOrderedList = "SELECT * FROM " + USER_TABLE + " ORDER BY " + USER_SCORE + " DESC " + " LIMIT 10 ";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -86,8 +86,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void copyDataBase() throws IOException
     {
         InputStream ip = myContext.getAssets().open(DATABASE_NAME);
-        String op =  "/data/data/com.example.demo/databases/"  +  DATABASE_NAME ;
-        OutputStream output = new FileOutputStream( op);
+        String op =  "/data/data/haui.android/databases/"  +  DATABASE_NAME ;
+        OutputStream output = new FileOutputStream(op);
         byte[] buffer = new byte[1024];
         int length;
         while ((length = ip.read(buffer))>0){
