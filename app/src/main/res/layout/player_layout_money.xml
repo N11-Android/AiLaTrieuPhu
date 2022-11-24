@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<thanggun99.ailatrieuphu.layout.MoneyLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<haui.android.layout.MoneyLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_money"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -197,4 +197,4 @@
 
     </LinearLayout>
 
-</thanggun99.ailatrieuphu.layout.MoneyLayout>
+</haui.android.layout.MoneyLayout>
