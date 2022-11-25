@@ -201,16 +201,16 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
             public void onCompletion(MediaPlayer mp) {
                 MainActivity.getMusicPlayer().stop();
                 noticeDialog.setCancelable(false);
-                noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi ?", "Sẵn sàng", "Bỏ qua", new View.OnClickListener() {
+                noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi?", "Sẵn sàng", "Bỏ qua", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         switch (v.getId()) {
-                            case R.id.btn_cancle:
+                            case R.id.btn_score_cancel:
                                 noticeDialog.dismiss();
                                 stopThread();
                                 finish();
                                 break;
-                            case R.id.btn_ok:
+                            case R.id.btn_save:
                                 noticeDialog.dismiss();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 MainActivity.getMusicPlayer().stop();

@@ -44,7 +44,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_ok"
+            android:id="@+id/btn_score_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="30px"
@@ -55,9 +55,10 @@
             android:textColor="#ffffff" />
 
         <Button
-            android:id="@+id/btn_ok2"
+            android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="30px"
             android:layout_weight="1"
             android:background="@drawable/btn_radius"
             android:text="Lưu"

@@ -23,7 +23,7 @@ public class NoticeDialog extends Dialog implements View.OnClickListener {
         setCancelable(true);
         setContentView(R.layout.notice_dialog);
 
-        btnCancle = (Button) findViewById(R.id.btn_cancle);
+        btnCancle = (Button) findViewById(R.id.btn_score_cancel);
         btnOk = (Button) findViewById(R.id.btn_ok);
         tvNotice = (TextView) findViewById(R.id.tv_notice);
     }
