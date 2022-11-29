@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ToggleButton;
 
-import haui.android.MainActivity;
+import haui.android.App;
 import haui.android.R;
 
 
@@ -21,8 +21,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
         togMusic = ((ToggleButton)findViewById(R.id.tog_music));
         togSound = ((ToggleButton)findViewById(R.id.tog_sound));
-        setBgTogMusic(MainActivity.getMusicPlayer().getStateMusic());
-        setBgTogSound(MainActivity.getMusicPlayer().getStateSound());
+        setBgTogMusic(App.getMusicPlayer().getStateMusic());
+        setBgTogSound(App.getMusicPlayer().getStateSound());
 
         togMusic.setOnClickListener(this);
         togSound.setOnClickListener(this);
@@ -41,13 +41,13 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        MainActivity.getMusicPlayer().pauseBgMusic();
+        App.getMusicPlayer().pauseBgMusic();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MainActivity.getMusicPlayer().resumeBgMusic();
+        App.getMusicPlayer().resumeBgMusic();
 
     }
 
@@ -69,12 +69,12 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
                 if(togMusic.isChecked()){
                     togMusic.setBackgroundResource(R.drawable.toggle_button_on);
                     togMusic.setChecked(true);
-                    MainActivity.getMusicPlayer().setStateMusic(true);
-                    MainActivity.getMusicPlayer().playBgMusic(R.raw.bgmusic);
+                    App.getMusicPlayer().setStateMusic(true);
+                    App.getMusicPlayer().playBgMusic(R.raw.bgmusic);
                 }else{
                     togMusic.setBackgroundResource(R.drawable.toggle_button_off);
                     togMusic.setChecked(false);
-                    MainActivity.getMusicPlayer().stopBgMusic();
+                    App.getMusicPlayer().stopBgMusic();
                 }
                 break;
             case R.id.tog_sound:
@@ -88,7 +88,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MainActivity.getMusicPlayer().setting(togMusic.isChecked(), togSound.isChecked());
+        App.getMusicPlayer().setting(togMusic.isChecked(), togSound.isChecked());
 
     }
 

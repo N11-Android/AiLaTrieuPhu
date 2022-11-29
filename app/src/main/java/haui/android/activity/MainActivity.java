@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import haui.android.App;
 import haui.android.R;
 import haui.android.dialogs.NoticeDialog;
 import haui.android.fragments.HomeFragment;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.btn_ok) {
-                    haui.android.MainActivity.getMusicPlayer().stopBgMusic();
+                    App.getMusicPlayer().stopBgMusic();
                     finish();
 
                 }

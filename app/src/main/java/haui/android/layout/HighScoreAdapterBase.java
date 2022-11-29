@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import haui.android.MainActivity;
 import haui.android.R;
 import haui.android.model.User;
 

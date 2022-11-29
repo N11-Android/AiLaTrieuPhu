@@ -20,7 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import java.util.ArrayList;
 import java.util.Random;
 
-import haui.android.MainActivity;
+import haui.android.App;
 import haui.android.R;
 import haui.android.dialogs.AudienceDialog;
 import haui.android.dialogs.CallDialog;
@@ -76,7 +76,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         random = new Random();
         isPlaying = false;
         isReady = false;
-        databaseManager = new DatabaseManager(MainActivity.getContext());
+        databaseManager = new DatabaseManager(App.getContext());
         questions = new ArrayList<>();
         questions.addAll(databaseManager.get15Questions());
         tvCase = new TextView[4];
@@ -88,7 +88,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 tvTimer.setText(timer + "");
                 if (timer == 0) {
                     isPlaying = false;
-                    haui.android.MainActivity.getMusicPlayer().play(R.raw.out_of_time, null);
+                    App.getMusicPlayer().play(R.raw.out_of_time, null);
                     noticeDialog.setNotification("Hết giờ !", "Đóng", null, null);
                     noticeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
@@ -139,7 +139,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
             @Override
             public void onDrawerClosed(View drawerView) {
                 drawerLayout.removeDrawerListener(drawerListener);
-                haui.android.MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 getNewQuestion();
 
             }
@@ -196,10 +196,10 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
 
     private void loadRules() {
         drawerLayout.openDrawer(GravityCompat.START);
-        MainActivity.getMusicPlayer().play(MusicManager.LUAT_CHOI, new MediaPlayer.OnCompletionListener() {
+        App.getMusicPlayer().play(MusicManager.LUAT_CHOI, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 noticeDialog.setCancelable(false);
                 noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi?", "Sẵn sàng", "Bỏ qua", new View.OnClickListener() {
                     @Override
@@ -213,7 +213,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                             case R.id.btn_save:
                                 noticeDialog.dismiss();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                MainActivity.getMusicPlayer().stop();
+                                App.getMusicPlayer().stop();
                                 startGame();
                                 break;
                             default:
@@ -230,7 +230,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                     };
                     handler.postDelayed(runnable, 3000);
                 } else {
-                    MainActivity.getMusicPlayer().play(MusicManager.READY, null);
+                    App.getMusicPlayer().play(MusicManager.READY, null);
                     noticeDialog.show();
                 }
             }
@@ -240,36 +240,33 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
 
     private void startGame() {
         isReady = true;
-        MainActivity.getMusicPlayer().play(R.raw.gofind, new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
-                layoutMoney.setBackGroundLevel(level);
-                drawerLayout.openDrawer(GravityCompat.START);
-                MainActivity.getMusicPlayer().play(MusicManager.QUEST_1, new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        MainActivity.getMusicPlayer().stop();
-                        if (mp == null) {
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    playGame();
-                                }
-                            }, 3000);
-                        } else {
-                            playGame();
-                        }
+        App.getMusicPlayer().play(R.raw.gofind, mp -> {
+            App.getMusicPlayer().stop();
+            layoutMoney.setBackGroundLevel(level);
+            drawerLayout.openDrawer(GravityCompat.START);
+            App.getMusicPlayer().play(MusicManager.QUEST_1, new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    App.getMusicPlayer().stop();
+                    if (mp == null) {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                playGame();
+                            }
+                        }, 3000);
+                    } else {
+                        playGame();
                     }
-                });
-            }
+                }
+            });
         });
     }
 
     public void playGame() {
         drawerLayout.closeDrawer(GravityCompat.START);
         layoutPlay.setVisibility(View.VISIBLE);
-        MainActivity.getMusicPlayer().playBgMusic(R.raw.background_music);
+        App.getMusicPlayer().playBgMusic(R.raw.background_music);
         setQuestion();
         handler.post(runnableTimer);
     }
@@ -284,13 +281,13 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         tvCase[1].setBackgroundResource(R.drawable.player_answer_background_normal);
         tvCase[2].setBackgroundResource(R.drawable.player_answer_background_normal);
         tvCase[3].setBackgroundResource(R.drawable.player_answer_background_normal);
-        tvLevel.setText("Câu: " + ques.getLevel());
+        tvLevel.setText("Câu hỏi: ");
         tvQuestion.setText(ques.getQuestion());
         tvCase[0].setText("A: " + ques.getCaseA());
         tvCase[1].setText("B: " + ques.getCaseB());
         tvCase[2].setText("C: " + ques.getCaseC());
         tvCase[3].setText("D: " + ques.getCaseD());
-        MainActivity.getMusicPlayer().resumeBgMusic();
+        App.getMusicPlayer().resumeBgMusic();
         timer = 30;
         pgTimer.setVisibility(View.VISIBLE);
 
@@ -314,16 +311,16 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 }
             });
             noticeDialog.show();
-            MainActivity.getMusicPlayer().play(R.raw.best_player, null);
+            App.getMusicPlayer().play(R.raw.best_player, null);
             return;
         }
         level++;
         layoutMoney.setBackGroundLevel(level);
         drawerLayout.openDrawer(GravityCompat.START);
-        MainActivity.getMusicPlayer().play(MainActivity.getMusicPlayer().getIdsRaw(level), new MediaPlayer.OnCompletionListener() {
+        App.getMusicPlayer().play(App.getMusicPlayer().getIdsRaw(level), new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 if (mp == null) {
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -337,11 +334,11 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                     setQuestion();
                 }
                 if (level == 5) {
-                    MainActivity.getMusicPlayer().play(R.raw.important, null);
-                    MainActivity.getMusicPlayer().playBgMusic(R.raw.background_music_b);
+                    App.getMusicPlayer().play(R.raw.important, null);
+                    App.getMusicPlayer().playBgMusic(R.raw.background_music_b);
                 } else if (level == 10) {
-                    MainActivity.getMusicPlayer().play(R.raw.important, null);
-                    MainActivity.getMusicPlayer().playBgMusic(R.raw.background_music_c);
+                    App.getMusicPlayer().play(R.raw.important, null);
+                    App.getMusicPlayer().playBgMusic(R.raw.background_music_c);
                 }
             }
         });
@@ -352,10 +349,10 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         isPlaying = false;
         pgTimer.setVisibility(View.GONE);
         v.setBackgroundResource(R.drawable.player_answer_background_selected);
-        MainActivity.getMusicPlayer().play(ans, new MediaPlayer.OnCompletionListener() {
+        App.getMusicPlayer().play(ans, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 if (mp == null) {
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -363,17 +360,17 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                             if (getTrueAnswer() == id) {
                                 answerTrue(v, trueAns);
                             } else {
-                                answerFalse(v, MainActivity.getMusicPlayer().getIdsLoseCase(getTrueAnswer()));
+                                answerFalse(v, App.getMusicPlayer().getIdsLoseCase(getTrueAnswer()));
                             }
                         }
                     }, 2000);
                 } else {
                     if (getTrueAnswer() == id) {
                         if (level == 5 || level == 10 || level == 15) {
-                            MainActivity.getMusicPlayer().play(MusicManager.ANS_NOW, new MediaPlayer.OnCompletionListener() {
+                            App.getMusicPlayer().play(MusicManager.ANS_NOW, new MediaPlayer.OnCompletionListener() {
                                 @Override
                                 public void onCompletion(MediaPlayer mp) {
-                                    MainActivity.getMusicPlayer().stop();
+                                    App.getMusicPlayer().stop();
                                     answerTrue(v, trueAns);
                                 }
                             });
@@ -381,7 +378,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                             answerTrue(v, trueAns);
                         }
                     } else {
-                        answerFalse(v, MainActivity.getMusicPlayer().getIdsLoseCase(getTrueAnswer()));
+                        answerFalse(v, App.getMusicPlayer().getIdsLoseCase(getTrueAnswer()));
                     }
                 }
             }
@@ -391,11 +388,11 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
     private void answerFalse(final View v, int[] loseAnswer) {
         v.setBackgroundResource(R.drawable.player_answer_background_wrong);
         tvCase[getTrueAnswer() - 1].setBackgroundResource(R.drawable.player_answer_background_true);
-        tvCase[getTrueAnswer() - 1].startAnimation(AnimationUtils.loadAnimation(MainActivity.getContext(), R.anim.fade_loop));
-        MainActivity.getMusicPlayer().play(loseAnswer, new MediaPlayer.OnCompletionListener() {
+        tvCase[getTrueAnswer() - 1].startAnimation(AnimationUtils.loadAnimation(App.getContext(), R.anim.fade_loop));
+        App.getMusicPlayer().play(loseAnswer, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 if (mp == null) {
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -413,11 +410,11 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
     private void answerTrue(final View v, int[] trueAnswer) {
         tvMoney.setText(layoutMoney.getMoney(level));
         v.setBackgroundResource(R.drawable.player_answer_background_true);
-        v.startAnimation(AnimationUtils.loadAnimation(MainActivity.getContext(), R.anim.fade_loop));
-        MainActivity.getMusicPlayer().play(trueAnswer, new MediaPlayer.OnCompletionListener() {
+        v.startAnimation(AnimationUtils.loadAnimation(App.getContext(), R.anim.fade_loop));
+        App.getMusicPlayer().play(trueAnswer, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                MainActivity.getMusicPlayer().stop();
+                App.getMusicPlayer().stop();
                 if (mp == null) {
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -429,11 +426,11 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                     if (level == 5) {
                         drawerLayout.openDrawer(GravityCompat.START);
                         drawerLayout.addDrawerListener(drawerListener);
-                        MainActivity.getMusicPlayer().play(MusicManager.VUOT_MOC_1,null);
+                        App.getMusicPlayer().play(MusicManager.VUOT_MOC_1,null);
                     } else if (level == 10) {
                         drawerLayout.openDrawer(GravityCompat.START);
                         drawerLayout.addDrawerListener(drawerListener);
-                        MainActivity.getMusicPlayer().play(R.raw.chuc_mung_vuot_moc_02_0, null);
+                        App.getMusicPlayer().play(R.raw.chuc_mung_vuot_moc_02_0, null);
                     } else {
                         getNewQuestion();
                     }
@@ -494,11 +491,11 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 setClickAble(false);
                 btn5050.setEnabled(false);
 
-                MainActivity.getMusicPlayer().play(MusicManager.SOUND_5050, new MediaPlayer.OnCompletionListener() {
+                App.getMusicPlayer().play(MusicManager.SOUND_5050, new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        MainActivity.getMusicPlayer().stop();
-                        MainActivity.getMusicPlayer().resumeBgMusic();
+                        App.getMusicPlayer().stop();
+                        App.getMusicPlayer().resumeBgMusic();
                         int count = 0;
                         int b = 0;
                         setClickAble(true);
@@ -530,19 +527,19 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 isPlaying = false;
                 setClickAble(false);
                 callDialog.setTrueAnswer(questions.get(level - 1).getTrueCase());
-                MainActivity.getMusicPlayer().play(R.raw.help_call, new MediaPlayer.OnCompletionListener() {
+                App.getMusicPlayer().play(R.raw.help_call, new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        MainActivity.getMusicPlayer().stop();
+                        App.getMusicPlayer().stop();
                         callDialog.show();
-                        MainActivity.getMusicPlayer().play(R.raw.help_callb, null);
+                        App.getMusicPlayer().play(R.raw.help_callb, null);
                         callDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialog) {
-                                MainActivity.getMusicPlayer().stop();
+                                App.getMusicPlayer().stop();
                                 isPlaying = true;
                                 setClickAble(true);
-                                MainActivity.getMusicPlayer().resumeBgMusic();
+                                App.getMusicPlayer().resumeBgMusic();
                             }
                         });
                     }
@@ -560,19 +557,19 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 }
                 audienceDialog.prepareVote(questions.get(level - 1).getTrueCase(), cs);
                 audienceDialog.show();
-                MainActivity.getMusicPlayer().play(R.raw.khan_gia, new MediaPlayer.OnCompletionListener() {
+                App.getMusicPlayer().play(R.raw.khan_gia, new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        MainActivity.getMusicPlayer().stop();
+                        App.getMusicPlayer().stop();
                         audienceDialog.voteAnswer();
-                        MainActivity.getMusicPlayer().play(R.raw.hoi_y_kien_chuyen_gia_01b, null);
+                        App.getMusicPlayer().play(R.raw.hoi_y_kien_chuyen_gia_01b, null);
                         audienceDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialog) {
-                                MainActivity.getMusicPlayer().stop();
+                                App.getMusicPlayer().stop();
                                 isPlaying = true;
                                 setClickAble(true);
-                                MainActivity.getMusicPlayer().resumeBgMusic();
+                                App.getMusicPlayer().resumeBgMusic();
                             }
                         });
                     }
@@ -584,7 +581,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
     }
 
     public void saveScore(boolean stopGame) {
-        MainActivity.getMusicPlayer().stopBgMusic();
+        App.getMusicPlayer().stopBgMusic();
         stopThread();
         setClickAble(false);
         if (level > 1) {
@@ -604,24 +601,24 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
             scoreDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    MainActivity.getMusicPlayer().play(MusicManager.LOSE, new MediaPlayer.OnCompletionListener() {
+                    App.getMusicPlayer().play(MusicManager.LOSE, new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            MainActivity.getMusicPlayer().stop();
+                            App.getMusicPlayer().stop();
                             finish();
-                            MainActivity.getMusicPlayer().playBgMusic(R.raw.bgmusic);
+                            App.getMusicPlayer().playBgMusic(R.raw.bgmusic);
                         }
                     });
                 }
             });
             scoreDialog.show();
         } else {
-            MainActivity.getMusicPlayer().play(MusicManager.LOSE, new MediaPlayer.OnCompletionListener() {
+            App.getMusicPlayer().play(MusicManager.LOSE, new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    MainActivity.getMusicPlayer().stop();
+                    App.getMusicPlayer().stop();
                     finish();
-                    MainActivity.getMusicPlayer().playBgMusic(R.raw.bgmusic);
+                    App.getMusicPlayer().playBgMusic(R.raw.bgmusic);
                 }
             });
         }
@@ -649,16 +646,16 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onPause() {
-        MainActivity.getMusicPlayer().pauseBgMusic();
-        MainActivity.getMusicPlayer().pauseSound();
+        App.getMusicPlayer().pauseBgMusic();
+        App.getMusicPlayer().pauseSound();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (isPlaying) MainActivity.getMusicPlayer().resumeBgMusic();
-        MainActivity.getMusicPlayer().resumeSound();
+        if (isPlaying) App.getMusicPlayer().resumeBgMusic();
+        App.getMusicPlayer().resumeSound();
     }
 
     @Override

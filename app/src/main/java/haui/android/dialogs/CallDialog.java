@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import haui.android.MainActivity;
+import haui.android.App;
 import haui.android.R;
 
 
@@ -94,7 +94,7 @@ public class CallDialog extends Dialog implements View.OnClickListener {
         btnHelpCall[1].setEnabled(false);
         btnHelpCall[2].setEnabled(false);
         btnHelpCall[3].setEnabled(false);
-        MainActivity.getMusicPlayer().play(R.raw.call, new MediaPlayer.OnCompletionListener() {
+        App.getMusicPlayer().play(R.raw.call, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 callsLayout.removeAllViews();
