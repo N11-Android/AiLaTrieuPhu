@@ -6,34 +6,29 @@ public class Question {
     private String caseB;
     private String caseC;
     private String caseD;
-    private int trueCase, level;
+    private int trueCase;
 
     public Question(){
     }
 
     public Question(String question, String caseA,
                     String caseB, String caseC,
-                    String caseD, int trueCase, int level) {
+                    String caseD, int trueCase) {
         this.question = question;
         this.caseA = caseA;
         this.caseB = caseB;
         this.caseC = caseC;
         this.caseD = caseD;
         this.trueCase = trueCase;
-        this.level = level;
     }
     @Override
     public String toString() {
         return question+"\n"+
-                "level"+level+"\n"+
                 "A:"+caseA+"\n"+
                 "B:"+caseB+"\n"+
                 "C:"+caseC+"\n"+
                 "D:"+caseD+"\n"+
                 "Answer:"+trueCase+"\n";
-    }
-    public int getLevel() {
-        return level;
     }
 
     public String getQuestion() {

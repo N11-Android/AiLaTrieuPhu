@@ -13,7 +13,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import haui.android.MainActivity;
+import haui.android.App;
 import haui.android.R;
 import haui.android.activity.PlayerActivity;
 import haui.android.activity.SettingsActivity;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                MainActivity.getMusicPlayer().playBgMusic(R.raw.bgmusic);
+                App.getMusicPlayer().playBgMusic(R.raw.bgmusic);
             }
         }, 2500);
     }
@@ -54,13 +54,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity.getMusicPlayer().resumeBgMusic();
+        App.getMusicPlayer().resumeBgMusic();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MainActivity.getMusicPlayer().pauseBgMusic();
+        App.getMusicPlayer().pauseBgMusic();
     }
 
     @Override

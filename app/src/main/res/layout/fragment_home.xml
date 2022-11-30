@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_background"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".App">
 
     <FrameLayout
         android:layout_width="wrap_content"
