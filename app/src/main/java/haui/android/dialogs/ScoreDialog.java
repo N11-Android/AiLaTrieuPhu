@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import haui.android.App;
+import haui.android.DatabaseHelper;
 import haui.android.R;
 import haui.android.manager.DatabaseManager;
 
@@ -27,6 +28,7 @@ public class ScoreDialog extends Dialog implements View.OnClickListener {
 
         edtName = (EditText) findViewById(R.id.edt_name);
         tvScore = (TextView) findViewById(R.id.tv_score);
+        findViewById(R.id.btn_score_cancel).setOnClickListener(this);
         findViewById(R.id.btn_save).setOnClickListener(this);
 
     }
@@ -38,16 +40,20 @@ public class ScoreDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.btn_score_cancel) {
+            dismiss();
+        }
         if(v.getId() == R.id.btn_save){
             if (edtName.getText().toString().isEmpty()) {
                 return;
             }
             DatabaseManager databaseManager = new DatabaseManager(App.getContext());
             ContentValues values = new ContentValues();
-            values.put("Name", edtName.getText().toString().trim());
-            values.put("Score", score);
-            databaseManager.insert("HighScore", values);
+            values.put("username", edtName.getText().toString().trim());
+            values.put("score", score);
+            databaseManager.insert("USER", values);
             dismiss();
+
         }
     }
 }
