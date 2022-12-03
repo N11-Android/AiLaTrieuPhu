@@ -281,7 +281,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         tvCase[1].setBackgroundResource(R.drawable.player_answer_background_normal);
         tvCase[2].setBackgroundResource(R.drawable.player_answer_background_normal);
         tvCase[3].setBackgroundResource(R.drawable.player_answer_background_normal);
-        tvLevel.setText("Câu hỏi: ");
+        tvLevel.setText("Câu hỏi số " + level +": ");
         tvQuestion.setText(ques.getQuestion());
         tvCase[0].setText("A: " + ques.getCaseA());
         tvCase[1].setText("B: " + ques.getCaseB());
