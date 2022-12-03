@@ -18,9 +18,6 @@
             android:name=".layout.ListViewHighScore"
             android:exported="false" />
         <activity
-            android:name=".layout.HighScore"
-            android:exported="false" />
-        <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
