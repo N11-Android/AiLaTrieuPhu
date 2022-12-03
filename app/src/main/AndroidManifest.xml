@@ -17,10 +17,10 @@
             android:name=".layout.ListViewHighScore"
             android:exported="false" />
         <activity
-            android:name=".layout.HighScore"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".layout.HighScore"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
