@@ -115,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.moveToFirst();
 
         ArrayList<User> user_list = new ArrayList<>();
+
         while (!c.isAfterLast()){
             user_id = c.getInt(indexId);
             user_name = c.getString(indexName);
@@ -125,7 +126,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         c.close();
         db.close();
-
         return user_list;
     }
 }

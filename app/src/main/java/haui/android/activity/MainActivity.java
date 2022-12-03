@@ -8,7 +8,10 @@ import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 import haui.android.App;
+import haui.android.DatabaseHelper;
 import haui.android.R;
 import haui.android.dialogs.NoticeDialog;
 import haui.android.fragments.HomeFragment;
@@ -20,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponents();
+
+        DatabaseHelper helper = new DatabaseHelper(MainActivity.this);
+        helper.insertData();
+        try {
+            helper.copyDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initComponents() {
@@ -42,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 if (v.getId() == R.id.btn_ok) {
                     App.getMusicPlayer().stopBgMusic();
                     finish();
-
                 }
                 noticeDialog.dismiss();
             }
