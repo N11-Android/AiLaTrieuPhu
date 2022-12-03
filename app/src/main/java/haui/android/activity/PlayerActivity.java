@@ -201,16 +201,16 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
             public void onCompletion(MediaPlayer mp) {
                 App.getMusicPlayer().stop();
                 noticeDialog.setCancelable(false);
-                noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi?", "Sẵn sàng", "Bỏ qua", new View.OnClickListener() {
+                noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi?", "Sẵn sàng", "Chưa sẵn sàng", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         switch (v.getId()) {
-                            case R.id.btn_score_cancel:
+                            case R.id.btn_not_ready:
                                 noticeDialog.dismiss();
                                 stopThread();
                                 finish();
                                 break;
-                            case R.id.btn_save:
+                            case R.id.btn_ready:
                                 noticeDialog.dismiss();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 App.getMusicPlayer().stop();
@@ -452,7 +452,6 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
     }
 
     public int getTrueAnswer() {
-
         return questions.get(level - 1).getTrueCase();
     }
 
@@ -475,7 +474,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 noticeDialog.setNotification("Bạn thực sự muốn đổi câu hỏi ?", "Đồng ý", "Hủy bỏ", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (v.getId() == R.id.btn_ok) {
+                        if (v.getId() == R.id.btn_ready) {
                             questions.set(level - 1, databaseManager.getQuestionByLevel(level));
                             tvTimer.setText(30 + "");
                             setQuestion();
@@ -629,7 +628,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         noticeDialog.setNotification("Bạn thực sự muốn dừng cuộc chơi ?", "Đồng ý", "Hủy bỏ", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.btn_ok) {
+                if (v.getId() == R.id.btn_ready) {
                     handler.removeCallbacks(runnable);
                     saveScore(true);
                 }

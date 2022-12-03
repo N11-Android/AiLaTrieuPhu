@@ -17,7 +17,7 @@
         android:padding="16dp"
         android:orientation="horizontal">
         <Button android:layout_weight="1"
-            android:id="@+id/btn_score_cancel"
+            android:id="@+id/btn_not_ready"
             android:layout_height="42dp"
             android:layout_width="0dp"
             android:background="@drawable/btn_radius"
@@ -26,7 +26,7 @@
             android:textColor="#ffffff"
             android:textAllCaps="false"/>
         <Button android:layout_weight="1"
-            android:id="@+id/btn_ok"
+            android:id="@+id/btn_ready"
             android:textAllCaps="false"
             android:layout_height="42dp"
             android:layout_width="0dp"

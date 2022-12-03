@@ -32,7 +32,11 @@
             android:layout_width="102dp"
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:textOff="Bật"
+            android:textOn="Tắt"
+            android:showText="true"
+            android:switchMinWidth="70dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -62,7 +66,11 @@
             android:layout_width="102dp"
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:textOff="Bật"
+            android:textOn="Tắt"
+            android:showText="true"
+            android:switchMinWidth="70dp"/>
     </RelativeLayout>
 
 </LinearLayout>

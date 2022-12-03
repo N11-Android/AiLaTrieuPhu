@@ -34,6 +34,10 @@
             android:name=".activity.PlayerActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
     </application>
 
 </manifest>

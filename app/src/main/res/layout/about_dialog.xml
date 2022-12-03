@@ -24,7 +24,7 @@
             android:id="@+id/textView1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Ai Là Triệu Phú"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -49,7 +49,7 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="1.0.0"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -74,7 +74,7 @@
             android:id="@+id/textView5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="01/12/2022"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -98,7 +98,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView

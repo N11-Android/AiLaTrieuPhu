@@ -4,6 +4,7 @@ package haui.android.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.ToggleButton;
 
 import haui.android.App;
@@ -11,16 +12,16 @@ import haui.android.R;
 
 
 public class SettingsActivity extends Activity implements View.OnClickListener {
-    private ToggleButton togMusic;
-    private ToggleButton togSound;
+    private Switch togMusic;
+    private Switch togSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        togMusic = ((ToggleButton)findViewById(R.id.tog_music));
-        togSound = ((ToggleButton)findViewById(R.id.tog_sound));
+        togMusic = ((Switch)findViewById(R.id.tog_music));
+        togSound = ((Switch)findViewById(R.id.tog_sound));
         setBgTogMusic(App.getMusicPlayer().getStateMusic());
         setBgTogSound(App.getMusicPlayer().getStateSound());
 
@@ -30,10 +31,10 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
     public void setBgTogMusic(boolean state){
         if(state){
-            togMusic.setBackgroundResource(R.drawable.toggle_button_on);
+//            togMusic.setBackgroundResource(R.drawable.toggle_button_on);
             togMusic.setChecked(true);
         }else{
-            togMusic.setBackgroundResource(R.drawable.toggle_button_off);
+//            togMusic.setBackgroundResource(R.drawable.toggle_button_off);
             togMusic.setChecked(false);
         }
     }
@@ -53,10 +54,10 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
     public void setBgTogSound(boolean state){
         if(state){
-            togSound.setBackgroundResource(R.drawable.toggle_button_on);
+//            togSound.setBackgroundResource(R.drawable.toggle_button_on);
             togSound.setChecked(true);
         }else{
-            togSound.setBackgroundResource(R.drawable.toggle_button_off);
+//            togSound.setBackgroundResource(R.drawable.toggle_button_off);
             togSound.setChecked(false);
         }
 
@@ -67,15 +68,16 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         switch (v.getId()){
             case R.id.tog_music:
                 if(togMusic.isChecked()){
-                    togMusic.setBackgroundResource(R.drawable.toggle_button_on);
+//                    togMusic.setBackgroundResource(R.drawable.toggle_button_on);
                     togMusic.setChecked(true);
                     App.getMusicPlayer().setStateMusic(true);
                     App.getMusicPlayer().playBgMusic(R.raw.bgmusic);
-                }else{
-                    togMusic.setBackgroundResource(R.drawable.toggle_button_off);
+                } else {
+//                    togMusic.setBackgroundResource(R.drawable.toggle_button_off);
                     togMusic.setChecked(false);
                     App.getMusicPlayer().stopBgMusic();
                 }
+//                setBgTogMusic(togMusic.isChecked());
                 break;
             case R.id.tog_sound:
                 setBgTogSound(togSound.isChecked());

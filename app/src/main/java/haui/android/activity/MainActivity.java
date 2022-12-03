@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         noticeDialog.setNotification("Bạn muốn thoát trò chơi ?", "Đồng ý", "Hủy", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.btn_ok) {
+                if (v.getId() == R.id.btn_ready) {
                     App.getMusicPlayer().stopBgMusic();
                     finish();
 
