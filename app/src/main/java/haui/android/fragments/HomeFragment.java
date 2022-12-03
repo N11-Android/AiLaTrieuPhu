@@ -18,6 +18,7 @@ import haui.android.R;
 import haui.android.activity.PlayerActivity;
 import haui.android.activity.SettingsActivity;
 import haui.android.dialogs.AboutDialog;
+import haui.android.layout.HighScore;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -77,6 +78,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_about:
                 AboutDialog aboutDialog = new AboutDialog(getContext());
                 aboutDialog.show();
+                break;
+            case R.id.btn_high_score:
+                Intent intent2 = new Intent(getContext(), HighScore.class);
+                startActivity(intent2);
                 break;
             default:
                 break;

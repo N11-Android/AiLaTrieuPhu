@@ -588,7 +588,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 scoreDialog.setScore(tvMoney.getText().toString());
             } else {
                 if (level < 5) {
-                    scoreDialog.setScore("200,000");
+                    scoreDialog.setScore("0");
                 } else if (level < 10) {
                     scoreDialog.setScore("2,000,000");
                 } else if (level < 15) {
