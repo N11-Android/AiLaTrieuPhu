@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import haui.android.R;
+import haui.android.fragments.HomeFragment;
 
 
 public class NoticeDialog extends Dialog implements View.OnClickListener {
@@ -44,15 +48,14 @@ public class NoticeDialog extends Dialog implements View.OnClickListener {
         btnOk.setOnClickListener(onClickListener);
         btnCancle.setOnClickListener(onClickListener);
 
-        if (textCancle == null) btnCancle.setVisibility(View.GONE);
-
-        if (onClickListener == null) btnOk.setOnClickListener(this);
-
-
+        if(textCancle == null) btnCancle.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View v) {
-        dismiss();
+        if(v.getId() == R.id.btn_score_cancel){
+            Thread.currentThread().interrupt();
+            dismiss();
+        }
     }
 }

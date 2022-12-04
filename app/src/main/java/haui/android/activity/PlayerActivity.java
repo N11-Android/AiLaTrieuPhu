@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,6 +28,7 @@ import haui.android.dialogs.AudienceDialog;
 import haui.android.dialogs.CallDialog;
 import haui.android.dialogs.NoticeDialog;
 import haui.android.dialogs.ScoreDialog;
+import haui.android.fragments.HomeFragment;
 import haui.android.layout.MoneyLayout;
 import haui.android.manager.DatabaseManager;
 import haui.android.manager.MusicManager;
@@ -108,6 +111,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_player);
         ivPlayer = (ImageView) findViewById(R.id.iv_player);
         btnHide = (Button) findViewById(R.id.btn_hide);
+
         pgTimer = (ProgressBar) findViewById(R.id.pg_timer);
         btn5050 = (ImageButton) findViewById(R.id.btn_5050);
         btnAudience = (ImageButton) findViewById(R.id.btn_audience);
@@ -191,35 +195,37 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
 
             }
         });
-
     }
 
     private void loadRules() {
         drawerLayout.openDrawer(GravityCompat.START);
+
         App.getMusicPlayer().play(MusicManager.LUAT_CHOI, new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 App.getMusicPlayer().stop();
                 noticeDialog.setCancelable(false);
-                noticeDialog.setNotification("Bạn đã sẵn sàng chơi với chúng tôi?", "Sẵn sàng", "Bỏ qua", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        switch (v.getId()) {
-                            case R.id.btn_score_cancel:
-                                noticeDialog.dismiss();
-                                stopThread();
-                                finish();
-                                break;
-                            case R.id.btn_save:
-                                noticeDialog.dismiss();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                App.getMusicPlayer().stop();
-                                startGame();
-                                break;
-                            default:
-                                break;
+                noticeDialog.setNotification(
+                        "Bạn đã sẵn sàng chơi với chúng tôi?",
+                        "Sẵn sàng",
+                        "Chưa sẵn sàng",
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(v.getId() == R.id.btn_score_cancel){
+                                    System.out.println("I'm not ready");
+                                    App.getMusicPlayer().stop();
+                                    noticeDialog.dismiss();
+                                    stopThread();
+                                    finish();
+                                }
+                                else if(v.getId() == R.id.btn_ok){
+                                    noticeDialog.dismiss();
+                                    drawerLayout.closeDrawer(GravityCompat.START);
+                                    App.getMusicPlayer().stop();
+                                    startGame();
+                                }
                         }
-                    }
                 });
                 if (mp == null) {
                     runnable = new Runnable() {
@@ -452,7 +458,6 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
     }
 
     public int getTrueAnswer() {
-
         return questions.get(level - 1).getTrueCase();
     }
 
@@ -520,7 +525,31 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.btn_hide:
-                drawerLayout.closeDrawer(GravityCompat.START);
+                App.getMusicPlayer().stop();
+                noticeDialog.setCancelable(false);
+                noticeDialog.setNotification(
+                    "Bạn đã sẵn sàng chơi với chúng tôi?",
+                    "Sẵn sàng",
+                    "Chưa sẵn sàng",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(v.getId() == R.id.btn_score_cancel){
+                                System.out.println("I'm not ready");
+                                App.getMusicPlayer().stop();
+                                noticeDialog.dismiss();
+                                stopThread();
+                                finish();
+                            }
+                            else if(v.getId() == R.id.btn_ok){
+                                noticeDialog.dismiss();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                App.getMusicPlayer().stop();
+                                startGame();
+                            }
+                        }
+                    });
+                noticeDialog.show();
                 break;
             case R.id.btn_call:
                 btnCall.setEnabled(false);
