@@ -23,7 +23,7 @@ public class DatabaseManager {
     private String DATABASE_NAME = "AiLaTrieuPhu.db";
     private String DATABASE_PATH =
             Environment.getDataDirectory().getAbsolutePath()
-                    + "/data/haui.android/databases";
+                    + "/data/haui.android/databases/";
 
     private static final String SQL_GET_15_QUESTION = "select * from (select* from QUESTION order by random()) limit 15";
 
@@ -38,7 +38,7 @@ public class DatabaseManager {
 
     private void copyDatabases() {
         try {
-            File file = new File(DATABASE_PATH + "AiLaTrieuPhu");
+            File file = new File(DATABASE_PATH + DATABASE_NAME);
             if (file.exists()) {
                 return;
             }
@@ -60,7 +60,7 @@ public class DatabaseManager {
 
     private void openDatabase() {
         if (sqLiteDatabase == null || !sqLiteDatabase.isOpen()) {
-            sqLiteDatabase = SQLiteDatabase.openDatabase(DATABASE_PATH + "AiLaTrieuPhu",
+            sqLiteDatabase = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME,
                     null, SQLiteDatabase.OPEN_READWRITE);
         }
     }
