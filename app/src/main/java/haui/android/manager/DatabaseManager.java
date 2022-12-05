@@ -25,7 +25,7 @@ public class DatabaseManager {
             Environment.getDataDirectory().getAbsolutePath()
                     + "/data/haui.android/databases/";
 
-    private static final String SQL_GET_15_QUESTION = "select * from (select* from QUESTION order by random()) limit 15";
+    private static final String SQL_GET_15_QUESTION = "select * from (select * from QUESTION order by random()) limit 15";
 
     private final Context context;
 
@@ -101,7 +101,7 @@ public class DatabaseManager {
     @SuppressLint("Range")
     public Question getQuestionByLevel(int lv) {
         openDatabase();
-        String sql = "select * from Question where level = '" + lv + "' order by random()  limit 1";
+        String sql = "select * from QUESTION order by random() limit 1";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         if (cursor == null
                 || cursor.getCount() == 0) {
@@ -110,16 +110,28 @@ public class DatabaseManager {
         cursor.moveToFirst();
 
         String question, caseA, caseB, caseC, caseD;
-        int level, trueCase;
+        int level = lv, trueCase;
 
-        question = cursor.getString(cursor.getColumnIndex("question"));
-        caseA = cursor.getString(cursor.getColumnIndex("casea"));
-        caseB = cursor.getString(cursor.getColumnIndex("caseb"));
-        caseC = cursor.getString(cursor.getColumnIndex("casec"));
-        caseD = cursor.getString(cursor.getColumnIndex("cased"));
-        level = cursor.getInt(cursor.getColumnIndex("level"));
-        trueCase = cursor.getInt(cursor.getColumnIndex("truecase"));
-        Question question1 = new Question(question, caseA, caseB, caseC, caseD, trueCase);
+        question = cursor.getString(cursor.getColumnIndex("content"));
+        int questionId = cursor.getInt(cursor.getColumnIndex("id"));
+        Cursor cursorAnswer = sqLiteDatabase.rawQuery("select * from ANSWER where question_id = '" + questionId + "'", null);
+        if (cursorAnswer == null
+                || cursorAnswer.getCount() == 0) {
+            return null;
+        }
+        List<String> answer = new ArrayList<>();
+        int is_true = 0;
+        cursorAnswer.moveToFirst();
+        while (cursorAnswer.isAfterLast() == false) {
+            answer.add(cursorAnswer.getString(cursorAnswer.getColumnIndex("content")));
+            int checkTrue = cursorAnswer.getInt(cursorAnswer.getColumnIndex("is_true"));
+            if (checkTrue == 0) {
+                is_true ++;
+            }
+            cursorAnswer.moveToNext();
+        }
+
+        Question question1 = new Question(question, answer.get(0), answer.get(1), answer.get(2), answer.get(3), is_true);
         closeDatabase();
         return question1;
     }
