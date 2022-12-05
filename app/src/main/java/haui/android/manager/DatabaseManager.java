@@ -99,7 +99,7 @@ public class DatabaseManager {
     }
 
     @SuppressLint("Range")
-    public Question getQuestionByLevel(int lv) {
+    public Question getQuestionByLevel() {
         openDatabase();
         String sql = "select * from QUESTION order by random() limit 1";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
@@ -109,8 +109,7 @@ public class DatabaseManager {
         }
         cursor.moveToFirst();
 
-        String question, caseA, caseB, caseC, caseD;
-        int level = lv, trueCase;
+        String question;
 
         question = cursor.getString(cursor.getColumnIndex("content"));
         int questionId = cursor.getInt(cursor.getColumnIndex("id"));
@@ -120,18 +119,21 @@ public class DatabaseManager {
             return null;
         }
         List<String> answer = new ArrayList<>();
+        int i = 1;
         int is_true = 0;
         cursorAnswer.moveToFirst();
         while (cursorAnswer.isAfterLast() == false) {
             answer.add(cursorAnswer.getString(cursorAnswer.getColumnIndex("content")));
             int checkTrue = cursorAnswer.getInt(cursorAnswer.getColumnIndex("is_true"));
-            if (checkTrue == 0) {
-                is_true ++;
+            if (checkTrue == 1) {
+                is_true = i;
             }
+            i++;
             cursorAnswer.moveToNext();
         }
 
         Question question1 = new Question(question, answer.get(0), answer.get(1), answer.get(2), answer.get(3), is_true);
+        System.out.println(question1.toString());
         closeDatabase();
         return question1;
     }
@@ -156,14 +158,16 @@ public class DatabaseManager {
                 return null;
             }
             List<String> answer = new ArrayList<>();
+            int i = 1;
             int is_true = 0;
             cursorAnswer.moveToFirst();
             while (cursorAnswer.isAfterLast() == false) {
                 answer.add(cursorAnswer.getString(cursorAnswer.getColumnIndex("content")));
                 int checkTrue = cursorAnswer.getInt(cursorAnswer.getColumnIndex("is_true"));
-                if (checkTrue == 0) {
-                    is_true ++;
+                if (checkTrue == 1) {
+                    is_true = i;
                 }
+                i++;
                 cursorAnswer.moveToNext();
             }
             questions.add(new Question(q, answer.get(0), answer.get(1), answer.get(2), answer.get(3), is_true));

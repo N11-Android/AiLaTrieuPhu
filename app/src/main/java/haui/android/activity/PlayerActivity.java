@@ -475,7 +475,7 @@ public class PlayerActivity extends Activity implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
                         if (v.getId() == R.id.btn_ready) {
-                            questions.set(level - 1, databaseManager.getQuestionByLevel(level));
+                            questions.set(level - 1, databaseManager.getQuestionByLevel());
                             tvTimer.setText(30 + "");
                             setQuestion();
                             btnChange.setEnabled(false);
