@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/player_money_background">
+    android:background="@drawable/player_money_background"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,7 +106,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vũ Thành Đạt"
+                android:text="Trần Thu Hằng"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -113,31 +114,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nguyễn Tiến Đại"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bạch Văn Hải"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Trần Thu Hằng"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hoàng Anh Nghiệp"
+                android:text="Nguyễn Ngọc Khánh"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 

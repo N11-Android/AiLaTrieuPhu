@@ -40,7 +40,8 @@
         android:hint="Nhập tên của bạn"
         android:paddingLeft="32dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
+        android:textColorHint="#FFFFFF"
+        android:importantForAutofill="noExcludeDescendants"/>
 
     <LinearLayout
         android:layout_width="match_parent"
